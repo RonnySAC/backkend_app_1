@@ -80,7 +80,7 @@ mercadoPagoRoutes(app);
 //LE DECIMOS EN QUE PUERTO ESCUCHARÁ NUESTRO SERVIDOR ASÍ MISMO LE ASIGANAMOS NUESTRA IP PARA PROBAR EL BACKEND
 //EN CASO HAYA UN ERROR CON NUESTRA IP , LE DECIMOS QUE APUNTE DIRECTAMENTE AL LOCALHOST
 //TIENES QUE CAMBIAR ESO PONES TU DIRECCIÓN IP QUE T HAN ASIGNADO, EJEMPLO
-server.listen(3000, '192.168.1.36' || 'localhost', function(){
+server.listen(3000, '0.0.0.0' || 'localhost', function(){
     console.log('Aplicación de NodeJS ' + port + ' Iniciada...')
 });
 
