@@ -1,4 +1,4 @@
-//definimos las constantes
+// Definimos las constantes
 const express = require('express');
 const app = express();
 const http = require('http');
@@ -13,12 +13,11 @@ const io = require('socket.io')(server);
 const mercadopago = require('mercadopago');
 
 /*
-* MERCADO PAGO CONFIGUARCIÓN
+* MERCADO PAGO CONFIGURACIÓN
 */
 mercadopago.configure({
     access_token: 'TEST-1366316962470831-110111-7f9aab184310fc3bab3ef95a73dacbaa-1229522628'
 });
-
 
 /*
 * SOCKETS
@@ -30,11 +29,11 @@ const orderDeliverySocket = require('./sockets/orders_delivery_socket');
 */
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
-})
+});
 
 const upload = multer({
     storage: multer.memoryStorage()
-})
+});
 
 /* 
 * RUTAS
@@ -46,9 +45,9 @@ const address = require('./routes/addressRoutes');
 const orders = require('./routes/ordersRoutes');
 const mercadoPagoRoutes = require('./routes/mercadoPagoRoutes');
 
-
-//define el puerto que escucha el servidor 
+// Define el puerto que escucha el servidor
 const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -60,16 +59,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
-//configuración de seguridad
+// Configuración de seguridad
 app.disable('x-powered-by');
-
 app.set('port', port);
 
-//llamamos al sockets
+// Llamamos a los sockets
 orderDeliverySocket(io);
 
-//para ejecutar
-//llamando a las rutas
+// Para ejecutar
+// Llamando a las rutas
 users(app, upload);
 categories(app);
 address(app);
@@ -77,27 +75,25 @@ orders(app);
 products(app, upload);
 mercadoPagoRoutes(app);
 
-//LE DECIMOS EN QUE PUERTO ESCUCHARÁ NUESTRO SERVIDOR ASÍ MISMO LE ASIGANAMOS NUESTRA IP PARA PROBAR EL BACKEND
-//EN CASO HAYA UN ERROR CON NUESTRA IP , LE DECIMOS QUE APUNTE DIRECTAMENTE AL LOCALHOST
-//TIENES QUE CAMBIAR ESO PONES TU DIRECCIÓN IP QUE T HAN ASIGNADO, EJEMPLO
-server.listen(3000, '0.0.0.0' || 'localhost', function(){
-    console.log('Aplicación de NodeJS ' + port + ' Iniciada...')
+// Le decimos en qué puerto y dirección IP escuchará nuestro servidor
+server.listen(port, host, function(){
+    console.log('Aplicación de NodeJS iniciada en ' + host + ' en el puerto ' + port);
 });
 
-//CONFIGURACIÓN DE ERRORES
+// CONFIGURACIÓN DE ERRORES
 app.use((err, req, res, next) => {
     console.log(err);
     res.status(err.status || 500).send(err.stack);
 });
 
-
 module.exports = {
     app: app,
     server: server
-}
+};
 
-/*MENSAJES
+/* MENSAJES
 200 -> RESPUESTA EXITOSA
 404 -> URL NO EXISTE
 500 -> ERROR INTERNO DEL SERVIDOR
-*/ 
+*/
+
