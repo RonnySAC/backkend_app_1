@@ -1,0 +1,30 @@
+{
+  "name": "backend_f_ronny",
+  "version": "1.0.0",
+  "description": "Servicio de la app de la ferretería Ronny",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "flutter",
+    "nodejs"
+  ],
+  "author": "S",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/storage": "^5.8.5",
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.8.0",
+    "mercadopago": "^1.5.8",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "pg-promise": "^10.10.2",
+    "socket.io": "^2.4.1"
+  }
+}
