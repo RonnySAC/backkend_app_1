@@ -47,7 +47,7 @@ const mercadoPagoRoutes = require('./routes/mercadoPagoRoutes');
 
 // Define el puerto que escucha el servidor
 const port = process.env.PORT || 3000;
-const host = process.env.HOST || 'localhost';
+const host = process.env.HOST || '0.0.0.0';
 
 app.use(logger('dev'));
 app.use(express.json());
